@@ -1,22 +1,22 @@
 # SMN-pytorch
-0.Reproduce the result of paper Sequential Matching Network based on Pytorch. 
+0.Reproduce the result of paper Sequential Matching Network based on Pytorch. \n
 
 For details about data preprocessing and model, refer to paper 
 "Sequential Matching Network: A New Architecture for Multi-turn
 Response Selection in Retrieval-Based Chatbots"
 
 Author:
-Yu Wu† Wei Wu‡ Chen Xing♦, Zhoujun Li†∗ Ming Zhou‡ 
-†State Key Lab of Software Development Environment, Beihang University, Beijing, China
-♦College of Computer and Control Engineering, Nankai University, Tianjin, China
-‡ Microsoft Research, Beijing, China
-{wuyu,lizj}@buaa.edu.cn {wuwei,v-chxing,mingzhou}@microsoft.com
+Yu Wu† Wei Wu‡ Chen Xing♦, Zhoujun Li†∗ Ming Zhou‡ \n
+†State Key Lab of Software Development Environment, Beihang University, Beijing, China\n
+♦College of Computer and Control Engineering, Nankai University, Tianjin, China\n
+‡ Microsoft Research, Beijing, China\n
+{wuyu,lizj}@buaa.edu.cn {wuwei,v-chxing,mingzhou}@microsoft.com\n
+\n
+For Tensorflow version implemented by the author, see repo:\n
+https://github.com/MarkWuNLP/MultiTurnResponseSelection \n
 
-For Tensorflow version implemented by the author, see repo:
-https://github.com/MarkWuNLP/MultiTurnResponseSelection
 
-
-1.Requirements
+1.Requirements \n
 1.1 Dataset
 Data file+vocab file+pretrained word2vec
 All these can be downloaded in https://1drv.ms/u/s!AtcxwlQuQjw1jGn5kPzsH03lnG6U shared by author.
