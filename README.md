@@ -97,3 +97,11 @@ Not finished yet.
 4.Any issues
 
 Don't hesitate to ask for more information ^^
+
+5.Reference
+
+Parts of my model implementation followed SMN_Pytorch by @MaoGWLeon, thanks to his/her great code!
+
+https://github.com/MaoGWLeon/SMN_Pytorch
+
+
