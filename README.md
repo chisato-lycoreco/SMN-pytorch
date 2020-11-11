@@ -1,15 +1,23 @@
 # SMN-pytorch
 0.Reproduce the result of paper Sequential Matching Network based on Pytorch. 
 
+My result(R10@1/R10W2/R10@5 metric) on Ubuntu Dialog Corpus is nearly consistent with the result shown in paper.
+
+R2@1 metric which requires more extra processing is not calculated, but the correctness of my code can be ensured. 
+
 For details about data preprocessing and model, refer to paper 
 "Sequential Matching Network: A New Architecture for Multi-turn
 Response Selection in Retrieval-Based Chatbots"
 
 Author:
 Yu Wu† Wei Wu‡ Chen Xing♦, Zhoujun Li†∗ Ming Zhou‡ 
+
 †State Key Lab of Software Development Environment, Beihang University, Beijing, China
+
 ♦College of Computer and Control Engineering, Nankai University, Tianjin, China
+
 ‡ Microsoft Research, Beijing, China
+
 {wuyu,lizj}@buaa.edu.cn {wuwei,v-chxing,mingzhou}@microsoft.com
 
 For Tensorflow version implemented by the author, see repo:
@@ -35,11 +43,13 @@ Also I would like to upload the files to BaiduCloudDisk.
 1.2 Environment
 
 Tested on Ubuntu 16.04LTS with CUDA 10.1 + Pytorch 1.7
+
 some third-party packages(easy to install with pip)
 
 1.3 Device
 
 Maybe 1 GPU or 2 is best. If you want more GPUs to be used, you should be able to deal with some trivial bug caused by cuda setup function.
+
 Note that when model is trained in parallel on multiple GPUs,the speed depends on the slowest one, which is called bottleneck. 
 
 2.Run
@@ -47,6 +57,7 @@ Note that when model is trained in parallel on multiple GPUs,the speed depends o
 2.1 How to run
 
 Change directory to the path where you clone these code and enter command:sh run.sh
+
 It takes about 60-80 minutes to finish all the 3 experiments listed in run.sh
 
 2.2 Model type
