@@ -60,9 +60,9 @@ check all the arguments you can give:python run_train.py -help
 
 Don't forget to set :
 
---data_dir <the path where all the data files are saved> 
+--data_dir {the path where all the data files are saved}
  
---output_dir <the path where cached file and trained model parameters should be saved>
+--output_dir {the path where cached file and trained model parameters should be saved}
  
  in run.sh,
  
