@@ -19,9 +19,18 @@ https://github.com/MarkWuNLP/MultiTurnResponseSelection
 1.Requirements 
 
 1.1 Dataset
+
 Data file+vocab file+pretrained word2vec
+
 All these can be downloaded in https://1drv.ms/u/s!AtcxwlQuQjw1jGn5kPzsH03lnG6U shared by author.
-Perhaps VPN is needed if you are in China. Also I would like to upload the files to BaiduCloudDisk.
+
+Perhaps VPN is needed if you are in China. 
+
+Also I would like to upload the files to BaiduCloudDisk.
+
+链接：https://pan.baidu.com/s/1kNjD0ye8NhhQfBBCZwFrnw 
+
+提取码：ctbk 
 
 1.2 Environment
 
@@ -53,7 +62,7 @@ It takes about 60-80 minutes to finish all the 3 experiments listed in run.sh
 
 2.3 Experiment settings
 
-check all the arguments you can give:python run_train.py -help
+check all the parameters you can give : python run_train.py -help
 
 
 2.4 File path
@@ -73,3 +82,7 @@ All that you are expected to see when program is run successfully is writen as c
 3.Douban Conversation Corpus
 
 Not finished yet.
+
+4.Any issues
+
+Don't hesitate to ask for more information ^^
