@@ -23,7 +23,7 @@ class GRUEncoder(nn.Module):
                  embedder=None,
                  rnn_hidden_size=None,
                  num_layers=1,
-                 bidirectional=True,
+                 bidirectional=False,
                  dropout=0.0):
         super(GRUEncoder, self).__init__()
 
@@ -160,7 +160,7 @@ class URMatching(nn.Module):
         for k in hh_r:
             nn.init.orthogonal_(k)
 
-        self.gru_hidden_size=self.args.hidden_size*2
+        self.gru_hidden_size=self.args.hidden_size
 
         self.A=nn.Parameter(
             torch.randn(size=(self.gru_hidden_size,self.gru_hidden_size),requires_grad=True)
@@ -265,19 +265,19 @@ class MatchingAccumulation(nn.Module):
 
         #parameters for SMN-dynamic (W1,W2,ts)
         if self.args.fusion_type=='dynamic':
-            self.linear1=nn.Linear(self.args.hidden_size*2,self.args.q,bias=True)
+            self.linear1=nn.Linear(self.args.hidden_size,self.args.q,bias=True)
             linear1_weight = (param.data for name, param in self.linear1.named_parameters() if "weight" in name)
             for w in linear1_weight:
                 nn.init.xavier_uniform_(w)
 
-            self.linear2=nn.Linear(self.args.hidden_size_ma*2,self.args.q,bias=False)
+            self.linear2=nn.Linear(self.args.hidden_size_ma,self.args.q,bias=False)
             linear2_weight = (param.data for name, param in self.linear2.named_parameters() if "weight" in name)
             for w in linear2_weight:
                 nn.init.xavier_uniform_(w)
 
             self.ts=nn.Parameter(torch.randn(size=(self.args.q,1)),requires_grad=True)
 
-        self.lin_output=nn.Linear(self.args.hidden_size_ma*2,2,bias=True)
+        self.lin_output=nn.Linear(self.args.hidden_size_ma,2,bias=True)
         final_linear_weight = (param.data for name, param in self.lin_output.named_parameters() if "weight" in name)
         for w in final_linear_weight:
             nn.init.xavier_uniform_(w)
