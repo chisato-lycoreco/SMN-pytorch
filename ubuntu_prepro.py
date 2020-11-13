@@ -130,9 +130,7 @@ class UbuntuCorpus(object):
         return examples
 
 
-    def load_data(self):
-        #读取data.pt
-        self.data = torch.load(self.data_file)
+ 
 
     
     def create_batch(self, data_type="train"):
@@ -173,53 +171,82 @@ class UbuntuCorpus(object):
         features = []
         desc_message = "GET Feature FROM " + data_type.upper()
         # self.embedding=pickle.load(open(self.embed_file,'rb'),encoding='bytes')
-        for i, example in tqdm(enumerate(examples), desc=desc_message):
-            # utterance填充、截短
-            # utterances = example.utterences[-self.args.max_utter_num:]#取最后max_utter_num个
-            utterances = example.utterences
+        for i,example in tqdm(enumerate(examples), desc=desc_message):
+            #utterance填充、截短
+            utterances = example.utterences[-self.args.max_utter_num:]
             us_vec, us_len = [], []
-            utter_count=0
-            for utterance in reversed(utterances):
-                #从后向前遍历，如果为空就跳过，如果不为空就填充/截短后扔进去
-                if utter_count==self.args.max_utter_num:break
-
-                if not utterance:
-                    continue
-                #如果不为空，且长度小于max
-                if len(utterance) <= self.args.max_seq_length:
-                    u_len = len(utterance)
-                    u_vec = utterance + [0] * (self.args.max_seq_length - len(utterance))
+            for utterance in utterances:
+                if len(utterance)<=self.args.max_seq_length:
+                    u_len=len(utterance)
+                    u_vec=utterance+[0]*(self.args.max_seq_length-len(utterance))
                 else:
-                    u_len = self.args.max_seq_length
+                    u_len=self.args.max_seq_length
                     u_vec = utterance[:self.args.max_seq_length]
                 us_vec.append(u_vec)
                 us_len.append(u_len)
-
-                utter_count+=1
-
-            us_vec.reverse()
-            us_len.reverse()
-
-            #若对话轮次不足max_utter,填充
-            if len(us_vec) < self.args.max_utter_num:
-                us_len = [0] * (self.args.max_utter_num - len(us_len)) + us_len
-                us_num = len(us_vec)
-                us_vec = (self.args.max_utter_num - len(us_vec)) * [[0] * self.args.max_seq_length] + us_vec
+            if len(utterances)<self.args.max_utter_num:
+                us_len+=[0]*(self.args.max_utter_num-len(utterances))
+                us_num=len(utterances)
+                us_vec+=(self.args.max_utter_num-len(utterances))*[[0]*self.args.max_seq_length]
             else:
-                us_num = self.args.max_utter_num
-
-
-            assert len(us_vec) == self.args.max_utter_num
-            assert len(us_len) == self.args.max_utter_num
-
-            # response填充、截短
-            response = example.response
-            if len(response) <= self.args.max_seq_length:
-                r_len = len(response)
-                r_vec = response + [0] * (self.args.max_seq_length - len(response))
+                us_num=self.args.max_utter_num
+            #response填充、截短
+            response=example.response
+            if len(response)<=self.args.max_seq_length:
+                r_len=len(response)
+                r_vec=response+[0]*(self.args.max_seq_length-len(response))
             else:
-                r_len = self.args.max_seq_length
+                r_len=self.args.max_seq_length
                 r_vec = response[:self.args.max_seq_length]
+        # for i, example in tqdm(enumerate(examples), desc=desc_message):
+        #     # utterance填充、截短
+        #     # utterances = example.utterences[-self.args.max_utter_num:]#取最后max_utter_num个
+        #     utterances = example.utterences
+        #     us_vec, us_len = [], []
+        #     utter_count=0
+
+            
+            # for utterance in reversed(utterances):
+            #     #从后向前遍历，如果为空就跳过，如果不为空就填充/截短后扔进去
+            #     if utter_count==self.args.max_utter_num:break
+
+            #     if not utterance:
+            #         continue
+            #     #如果不为空，且长度小于max
+            #     if len(utterance) <= self.args.max_seq_length:
+            #         u_len = len(utterance)
+            #         u_vec = utterance + [0] * (self.args.max_seq_length - len(utterance))
+            #     else:
+            #         u_len = self.args.max_seq_length
+            #         u_vec = utterance[:self.args.max_seq_length]
+            #     us_vec.append(u_vec)
+            #     us_len.append(u_len)
+
+            #     utter_count+=1
+
+            # us_vec.reverse()
+            # us_len.reverse()
+
+            # #若对话轮次不足max_utter,填充
+            # if len(us_vec) < self.args.max_utter_num:
+            #     us_len = [0] * (self.args.max_utter_num - len(us_len)) + us_len
+            #     us_num = len(us_vec)
+            #     us_vec = (self.args.max_utter_num - len(us_vec)) * [[0] * self.args.max_seq_length] + us_vec
+            # else:
+            #     us_num = self.args.max_utter_num
+
+
+            # assert len(us_vec) == self.args.max_utter_num
+            # assert len(us_len) == self.args.max_utter_num
+
+            # # response填充、截短
+            # response = example.response
+            # if len(response) <= self.args.max_seq_length:
+            #     r_len = len(response)
+            #     r_vec = response + [0] * (self.args.max_seq_length - len(response))
+            # else:
+            #     r_len = self.args.max_seq_length
+            #     r_vec = response[:self.args.max_seq_length]
 
             # 构造MTRSFeature类样本
             features.append(MTRSFeatures(
