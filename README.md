@@ -1,5 +1,5 @@
 # SMN-pytorch
-0.Reproduce the result of paper Sequential Matching Network based on Pytorch. 
+0.Full reproduction of the result of paper Sequential Matching Network based on Pytorch. 
 
 My result(R10@1/R10W2/R10@5 metric) on Ubuntu Dialog Corpus is nearly consistent with the result shown in paper.
 
